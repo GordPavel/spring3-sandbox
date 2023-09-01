@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - property:
+      name: now
+      value: current_timestamp
+      dbms: postgresql
+
+  - changeSet:
+      id: 2023-09-01-create-users-table
+      author: pvgordeev
+      comment: Create users table
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(30)
+                  constraints:
+                    unique: true
+              - column:
+                  name: password
+                  type: bytea
+              - column:
+                  name: roles
+                  type: jsonb
+        - createIndex:
+            schemaName: public
+            tableName: users
+            indexName: users_username_idx
+            columns:
+              - column:
+                  name: username

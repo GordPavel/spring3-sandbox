@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+      base-path: /management
+
+spring:
+  r2dbc:
+    name: main-db
+    url: r2dbc:postgresql://${datasource.main-db.host}:${datasource.main-db.port}/${datasource.main-db.database}
+    username: ${datasource.main-db.username}
+    password: ${datasource.main-db.password}
+    pool:
+      min-idle: 1
+      max-idle-time: PT300S
+      initial-size: 2
+      max-size: 7
+
+datasource:
+  main-db:
+    jdbc-url: jdbc:postgresql://${datasource.main-db.host}:${datasource.main-db.port}/${datasource.main-db.database}
+    maximum-pool-size: 7
+    pool-name: MAIN_POOl

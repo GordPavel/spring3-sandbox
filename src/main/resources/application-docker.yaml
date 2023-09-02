@@ -1,0 +1,12 @@
+datasource:
+  main-db:
+    host: db
+    port: 5432
+    database: public
+    username: user
+    password: password
+
+static-credentials:
+  username: test
+  password: test
+  roles: ADMIN
